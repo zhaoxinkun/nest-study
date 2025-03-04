@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-
-// 使用dotenv
-import * as process from 'node:process';
+import * as config from 'config';
 
 @Injectable()
 export class UserService {
@@ -11,7 +9,7 @@ export class UserService {
         id: 1,
         name: 'John Doe',
         email: 'john@doe.com',
-        env: process.env.DB_TYPE,
+        env: config.get('db.host'),
       },
       {
         id: 2,
