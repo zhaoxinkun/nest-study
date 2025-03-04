@@ -1,19 +1,1 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { ConfigModule } from '@nestjs/config';
-
-@Module({
-  imports: [
-    UserModule,
-    // 配置使用nest/config
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: ['.env.development.local', '.env.development'],
-    }),
-  ],
-  controllers: [AppController],
-  providers: [AppService],
-})
-export class AppModule {}
+import { Module } from '@nestjs/common';import { AppController } from './app.controller';import { AppService } from './app.service';import { UserModule } from './user/user.module';import { ConfigModule } from '@nestjs/config';import * as Joi from 'joi';@Module({  imports: [    UserModule,    // 配置使用nest/config    ConfigModule.forRoot({      isGlobal: true,      envFilePath: ['.env.development.local', '.env.development'],      validationSchema: Joi.object({        NODE_ENV: Joi.string().valid('development', 'production').required().default('development'),        DB_TYPE: Joi.string().required(),        DB_HOST: Joi.string().required(),        DB_PORT: Joi.number().required().default(3090),        DB_USER: Joi.string().required(),        DB_PASSWORD: Joi.string().required(),        DB_NAME: Joi.string().required(),      }),    }),  ],  controllers: [AppController],  providers: [AppService],})export class AppModule {}
