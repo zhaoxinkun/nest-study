@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import * as config from 'config';
 
 @Injectable()
 export class UserService {
@@ -9,7 +8,6 @@ export class UserService {
         id: 1,
         name: 'John Doe',
         email: 'john@doe.com',
-        env: config.get('db.host'),
       },
       {
         id: 2,
